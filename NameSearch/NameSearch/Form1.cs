@@ -33,7 +33,7 @@ namespace NameSearch
                 const int SIZE = 5000;
                 string[] namesArray = new string[SIZE];
                 StreamReader inputFile = File.OpenText("Names.csv");
-                StreamWriter outputFile;
+                //StreamWriter outputFile;
                 
                 // Input names into Names Array while counter is less than the number of items
                 while (counter < namesArray.Length && !inputFile.EndOfStream)
@@ -43,7 +43,7 @@ namespace NameSearch
                 }
 
                 // Sort Array alphabetically 
-                Array.Sort(namesArray);
+                SelectionSort(namesArray);
                 
                 // Close file connection
                 inputFile.Close();
@@ -68,7 +68,50 @@ namespace NameSearch
             
         }
 
-        private int BinarySearch(string[] namesArray, int size, string value)
+        
+
+        private void SelectionSort(string [] namesArray)
+        {
+            int minIndex; //Subscript of smallest value in scanned area
+            string minValue; //smallest value in the scanned area
+
+            //The outter loop steps through all the array elements, Except the last one
+            // The startscan variable marks the position where the scan should begin
+            for (int startScan = 0; startScan < namesArray.Length - 1; startScan++)
+            {
+                //Assume the first element in the scannable area 
+                //Is the smallest value
+                minIndex = startScan;
+                minValue = namesArray[startScan];
+
+                //Scan the array, starting at the 2nd element in the 
+                //Scannable area, looking for the smallest value.
+                for (int index = startScan + 1; index < namesArray.Length; index++)
+                {
+                    if (string.Compare(minValue, namesArray[index], true) == 1)
+                    {
+                        minValue = namesArray[index];
+                        minIndex = index;
+                    }
+                }
+
+                //Swap the element with the smallest value with the
+                // first element in the scannable area
+                Swap(ref namesArray[minIndex], ref namesArray[startScan]);
+
+            }
+        }
+        
+        //The Swap method accepts two integer arguments, by reference
+        //and swaps there contents
+        private void Swap(ref string a, ref string b)
+        {
+            string temp = a;
+            a = b;
+            b = temp;
+        }
+
+        private int BinarySearch(string[] namesArray, string value)
         {
             int first = 0;
             int last = namesArray.Length - 1;
@@ -98,34 +141,46 @@ namespace NameSearch
             return position;
 
         }
-        
-        private void BtnSearch_Click(object sender, EventArgs e)
+
+        private void btnNameSearch_Click(object sender, EventArgs e)
         {
-            
+            int counter = 0;
 
             try
             {
+                // Declare Variables
                 string value = textBox1.Text;
                 int position;
                 string output;
-
+                // Constant for Array
                 const int SIZE = 5000;
+                // Array declaration
                 string[] namesArray = new string[SIZE];
+
+                // Open file
                 StreamReader inputFile = File.OpenText("Names.csv");
 
-                position = BinarySearch(namesArray, SIZE, value);
+                // Input names into Names Array while counter is less than the number of items
+                while (counter < namesArray.Length && !inputFile.EndOfStream)
+                {
+                    namesArray[counter] = inputFile.ReadLine();
+                    counter++;
+                }
+                
+                SelectionSort(namesArray);
 
-                output = namesArray[position];
+                position = BinarySearch(namesArray, value);
 
                 inputFile.Close();
-                Array.Sort(namesArray);
-                lbOutPut.Items.Add(output);
-                /*
-                foreach (string valuee in namesArray)
+                
+                lbOutPut.Items.Clear();
+
+                foreach ( int valuee in namesArray[position])
                 {
-                    lbOutPut.Items.Add(value);
+                    output = namesArray[position];
+                    lbOutPut.Items.Add(output);
                 }
-                */
+                
             }
             catch (Exception ex)
             {
@@ -167,6 +222,9 @@ namespace NameSearch
 
                 // Close the file
                 inputFile.Close();
+
+                MessageBox.Show("Done !");
+
             }
             catch (Exception ex)
             {

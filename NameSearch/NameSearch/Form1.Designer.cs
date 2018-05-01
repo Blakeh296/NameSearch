@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.BtnSearch = new System.Windows.Forms.Button();
+            this.btnNameSearch = new System.Windows.Forms.Button();
             this.lbOutPut = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -49,14 +49,14 @@
             this.textBox1.Size = new System.Drawing.Size(100, 20);
             this.textBox1.TabIndex = 1;
             // 
-            // BtnSearch
+            // btnNameSearch
             // 
-            this.BtnSearch.Location = new System.Drawing.Point(176, 195);
-            this.BtnSearch.Name = "BtnSearch";
-            this.BtnSearch.Size = new System.Drawing.Size(96, 23);
-            this.BtnSearch.TabIndex = 3;
-            this.BtnSearch.Text = "Search Name";
-            this.BtnSearch.UseVisualStyleBackColor = true;
+            this.btnNameSearch.Location = new System.Drawing.Point(176, 195);
+            this.btnNameSearch.Name = "btnNameSearch";
+            this.btnNameSearch.Size = new System.Drawing.Size(96, 23);
+            this.btnNameSearch.TabIndex = 3;
+            this.btnNameSearch.Text = "Search Name";
+            this.btnNameSearch.UseVisualStyleBackColor = true;
             // 
             // lbOutPut
             // 
@@ -102,21 +102,21 @@
             // loadAllToolStripMenuItem
             // 
             this.loadAllToolStripMenuItem.Name = "loadAllToolStripMenuItem";
-            this.loadAllToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.loadAllToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
             this.loadAllToolStripMenuItem.Text = "Load &All";
             this.loadAllToolStripMenuItem.Click += new System.EventHandler(this.loadAllToolStripMenuItem_Click);
             // 
             // exportToolStripMenuItem
             // 
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            this.exportToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
             this.exportToolStripMenuItem.Text = "&Export";
             this.exportToolStripMenuItem.Click += new System.EventHandler(this.exportToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
             this.exitToolStripMenuItem.Text = "&Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -149,7 +149,7 @@
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lbOutPut);
-            this.Controls.Add(this.BtnSearch);
+            this.Controls.Add(this.btnNameSearch);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.lblNameSearch);
             this.Controls.Add(this.menuStrip1);
@@ -165,7 +165,7 @@
 
         #endregion
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button BtnSearch;
+        private System.Windows.Forms.Button btnNameSearch;
         private System.Windows.Forms.ListBox lbOutPut;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.MenuStrip menuStrip1;
