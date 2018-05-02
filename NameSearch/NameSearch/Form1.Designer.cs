@@ -45,14 +45,14 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(172, 64);
+            this.textBox1.Location = new System.Drawing.Point(207, 64);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
+            this.textBox1.Size = new System.Drawing.Size(95, 20);
             this.textBox1.TabIndex = 1;
             // 
             // btnNameSearch
             // 
-            this.btnNameSearch.Location = new System.Drawing.Point(176, 90);
+            this.btnNameSearch.Location = new System.Drawing.Point(206, 90);
             this.btnNameSearch.Name = "btnNameSearch";
             this.btnNameSearch.Size = new System.Drawing.Size(96, 23);
             this.btnNameSearch.TabIndex = 3;
@@ -65,18 +65,20 @@
             this.lbOutPut.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbOutPut.FormattingEnabled = true;
             this.lbOutPut.ItemHeight = 16;
-            this.lbOutPut.Location = new System.Drawing.Point(12, 90);
+            this.lbOutPut.Location = new System.Drawing.Point(12, 86);
             this.lbOutPut.Name = "lbOutPut";
-            this.lbOutPut.Size = new System.Drawing.Size(158, 100);
+            this.lbOutPut.Size = new System.Drawing.Size(179, 164);
             this.lbOutPut.TabIndex = 4;
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(133, 193);
+            this.label1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(207, 145);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(0, 13);
+            this.label1.Size = new System.Drawing.Size(107, 105);
             this.label1.TabIndex = 5;
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // menuStrip1
             // 
@@ -87,7 +89,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.menuStrip1.Size = new System.Drawing.Size(284, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(326, 24);
             this.menuStrip1.TabIndex = 6;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -124,7 +126,7 @@
             // 
             // btnClear
             // 
-            this.btnClear.Location = new System.Drawing.Point(197, 119);
+            this.btnClear.Location = new System.Drawing.Point(227, 119);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(75, 23);
             this.btnClear.TabIndex = 7;
@@ -138,7 +140,7 @@
             this.lblNameSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNameSearch.Location = new System.Drawing.Point(-1, 24);
             this.lblNameSearch.Name = "lblNameSearch";
-            this.lblNameSearch.Size = new System.Drawing.Size(285, 31);
+            this.lblNameSearch.Size = new System.Drawing.Size(327, 31);
             this.lblNameSearch.TabIndex = 0;
             this.lblNameSearch.Text = "Name Search";
             this.lblNameSearch.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -147,17 +149,17 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(91, 65);
+            this.label2.Location = new System.Drawing.Point(12, 64);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(79, 16);
+            this.label2.Size = new System.Drawing.Size(185, 16);
             this.label2.TabIndex = 8;
-            this.label2.Text = "Type Here :";
+            this.label2.Text = "Type \'First name, Last name\' :";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 262);
+            this.ClientSize = new System.Drawing.Size(326, 262);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.label1);
@@ -166,6 +168,7 @@
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.lblNameSearch);
             this.Controls.Add(this.menuStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);

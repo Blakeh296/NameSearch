@@ -29,11 +29,13 @@ namespace NameSearch
                 DateTime start = DateTime.Now;
                 DateTime Finish;
                 TimeSpan Time;
+
                 // Array variables
                 const int SIZE = 5000;
                 string[] namesArray = new string[SIZE];
+
+                // Take the names from the file
                 StreamReader inputFile = File.OpenText("Names.csv");
-                //StreamWriter outputFile;
                 
                 // Input names into Names Array while counter is less than the number of items
                 while (counter < namesArray.Length && !inputFile.EndOfStream)
@@ -59,7 +61,19 @@ namespace NameSearch
                 // Subtract the times to get the total time
                 Time = Finish - start;
                 // output time for the user
-                label1.Text = "Load time : " + Time.ToString();
+
+                // Code changes message based on how long it took to load
+                if (Time.Seconds > 1)
+                {
+                    label1.Text = "Loaded " + SIZE + " Items in " + Time.Seconds.ToString() + " Seconds.";
+                }
+                else
+                {
+                    label1.Text = "Loaded " + SIZE + " Items in " + Time.Seconds.ToString() + " Second.";
+                }
+
+                
+                    
             }
             catch (Exception ex)
             {
@@ -113,10 +127,9 @@ namespace NameSearch
             }
 
             return position;
-
         }
 
-        private void SelectionSort(string [] namesArray)
+        private void SelectionSort(string[] namesArray)
         {
             int minIndex; //Subscript of smallest value in scanned area
             string minValue; //smallest value in the scanned area
@@ -150,6 +163,9 @@ namespace NameSearch
 
         private void btnNameSearch_Click_1(object sender, EventArgs e)
         {
+            DateTime Start = DateTime.Now;
+            DateTime Finish;
+            TimeSpan Time;
             int counter = 0;
 
             try
@@ -158,8 +174,10 @@ namespace NameSearch
                 string value = textBox1.Text;
                 int position;
                 string output;
+
                 // Constant for Array
                 const int SIZE = 5000;
+
                 // Array declaration
                 string[] namesArray = new string[SIZE];
 
@@ -172,20 +190,36 @@ namespace NameSearch
                     namesArray[counter] = inputFile.ReadLine();
                     counter++;
                 }
-
+                // Perform Selection sort
                 SelectionSort(namesArray);
 
+                // Use position variable to perform BinarySearch, with the Array and TextBox String
                 position = BinarySearch(namesArray, value);
 
+                // Close the file
                 inputFile.Close();
 
-                lbOutPut.Items.Clear();
+                Finish = DateTime.Now;
 
-                foreach (int valuee in namesArray[position])
+                Time = Finish - Start;
+
+                // Clear the Listbox
+                lbOutPut.Items.Clear();
+                // Output position to list box
+                lbOutPut.Items.Add("Found : " + value.ToString());
+                // display the time this took in the Label
+
+                // Code changes message based on how long it took to load
+                if (Time.Seconds > 1)
                 {
-                    output = namesArray[position];
-                    lbOutPut.Items.Add(output);
+                    label1.Text = Time.Seconds.ToString() + " Seconds.";
                 }
+                else
+                {
+                    label1.Text = Time.Seconds.ToString() + " Second.";
+                }
+
+                MessageBox.Show("Found !");
 
             }
             catch (Exception ex)
@@ -194,10 +228,14 @@ namespace NameSearch
             }
         }
 
+        
 
         private void exportToolStripMenuItem_Click(object sender, EventArgs e)
         {
             int counter = 0;
+            DateTime First = DateTime.Now;
+            DateTime Last;
+            TimeSpan Time;
 
             try
             {
@@ -228,6 +266,20 @@ namespace NameSearch
 
                 // Close the file
                 inputFile.Close();
+
+                Last = DateTime.Now;
+
+                Time = Last - First;
+
+                // Code changes message based on how the items took to export
+                if (Time.Seconds > 1)
+                {
+                    label1.Text = "Exported " + SIZE + " Items in " + Time.Seconds.ToString() + " Seconds.";
+                }
+                else
+                {
+                    label1.Text = "Exported " + SIZE + " Items in " + Time.Seconds.ToString() + " Second.";
+                }
 
                 MessageBox.Show("Done !");
 
@@ -278,7 +330,17 @@ namespace NameSearch
                 // Subtract the times to get the total time
                 Time = Finish - start;
                 // output time for the user
-                label1.Text = Time.ToString();
+                // Code changes message based on how long it took to load
+                if (Time.Seconds > 1)
+                {
+                    label1.Text = "Loaded " + SIZE + " Items in " + Time.Seconds.ToString() + " Seconds.";
+                }
+                else
+                {
+                    label1.Text = "Loaded " + SIZE + " Items in " + Time.Seconds.ToString() + " Second.";
+                }
+
+
             }
             catch (Exception ex)
             {
