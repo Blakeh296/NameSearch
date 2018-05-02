@@ -59,7 +59,7 @@ namespace NameSearch
                 // Subtract the times to get the total time
                 Time = Finish - start;
                 // output time for the user
-                label1.Text = Time.ToString();
+                label1.Text = "Load time : " + Time.ToString();
             }
             catch (Exception ex)
             {
@@ -100,7 +100,7 @@ namespace NameSearch
                     position = middle;
                 }
                 //Else if value is in lower half
-                else if (string.Compare(namesArray[middle], value, false) > 0)
+                else if (string.Compare(namesArray[middle], value, false) == 1)
                 {
                     last = middle - 1;
                 }
