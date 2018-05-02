@@ -39,6 +39,7 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnClear = new System.Windows.Forms.Button();
             this.lblNameSearch = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -51,12 +52,13 @@
             // 
             // btnNameSearch
             // 
-            this.btnNameSearch.Location = new System.Drawing.Point(176, 195);
+            this.btnNameSearch.Location = new System.Drawing.Point(176, 90);
             this.btnNameSearch.Name = "btnNameSearch";
             this.btnNameSearch.Size = new System.Drawing.Size(96, 23);
             this.btnNameSearch.TabIndex = 3;
             this.btnNameSearch.Text = "Search Name";
             this.btnNameSearch.UseVisualStyleBackColor = true;
+            this.btnNameSearch.Click += new System.EventHandler(this.btnNameSearch_Click_1);
             // 
             // lbOutPut
             // 
@@ -65,7 +67,7 @@
             this.lbOutPut.ItemHeight = 16;
             this.lbOutPut.Location = new System.Drawing.Point(12, 90);
             this.lbOutPut.Name = "lbOutPut";
-            this.lbOutPut.Size = new System.Drawing.Size(260, 100);
+            this.lbOutPut.Size = new System.Drawing.Size(158, 100);
             this.lbOutPut.TabIndex = 4;
             // 
             // label1
@@ -122,7 +124,7 @@
             // 
             // btnClear
             // 
-            this.btnClear.Location = new System.Drawing.Point(95, 195);
+            this.btnClear.Location = new System.Drawing.Point(197, 119);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(75, 23);
             this.btnClear.TabIndex = 7;
@@ -133,7 +135,7 @@
             // lblNameSearch
             // 
             this.lblNameSearch.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.lblNameSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNameSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNameSearch.Location = new System.Drawing.Point(-1, 24);
             this.lblNameSearch.Name = "lblNameSearch";
             this.lblNameSearch.Size = new System.Drawing.Size(285, 31);
@@ -141,11 +143,22 @@
             this.lblNameSearch.Text = "Name Search";
             this.lblNameSearch.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(91, 65);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(79, 16);
+            this.label2.TabIndex = 8;
+            this.label2.Text = "Type Here :";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 262);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lbOutPut);
@@ -175,6 +188,7 @@
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Label lblNameSearch;
+        private System.Windows.Forms.Label label2;
     }
 }
 

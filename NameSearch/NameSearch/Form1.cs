@@ -68,7 +68,53 @@ namespace NameSearch
             
         }
 
-        
+        //The Swap method accepts two integer arguments, by reference
+        //and swaps there contents
+        private void Swap(ref string a, ref string b)
+        {
+            string temp = a;
+            a = b;
+            b = temp;
+        }
+
+        private int BinarySearch(string[] namesArray, string value)
+        {
+            // Declare variables
+            int first = 0;
+            int last = namesArray.Length - 1;
+            int middle;
+            int position = -1;
+            bool found = false;
+
+            // While not found and first is less than or equal to last
+            while (!found && first <= last)
+            {
+
+                // Initialize my middle point
+                middle = (first + last) / 2;
+
+                // if value is found at mid point
+                if (namesArray[middle] == value)
+                {
+                    found = true;
+                    position = middle;
+                }
+                //Else if value is in lower half
+                else if (string.Compare(namesArray[middle], value, false) > 0)
+                {
+                    last = middle - 1;
+                }
+                //Else if value is in upper half
+                else
+                {
+                    first = middle + 1;
+                }
+
+            }
+
+            return position;
+
+        }
 
         private void SelectionSort(string [] namesArray)
         {
@@ -101,48 +147,8 @@ namespace NameSearch
 
             }
         }
-        
-        //The Swap method accepts two integer arguments, by reference
-        //and swaps there contents
-        private void Swap(ref string a, ref string b)
-        {
-            string temp = a;
-            a = b;
-            b = temp;
-        }
 
-        private int BinarySearch(string[] namesArray, string value)
-        {
-            int first = 0;
-            int last = namesArray.Length - 1;
-            int middle;
-            int position = -1;
-            bool found = false;
-
-            while (!found && first <= last)
-            {
-                middle = (first + last) / 2;
-                if (namesArray[middle] == value)
-                {
-                    found = true;
-                    position = middle;
-                }
-                else if (string.Compare(namesArray[middle], value, false) > 0)
-                {
-                    last = middle - 1;
-                }
-                else
-                {
-                    first = middle + 1;
-                }
-
-            }
-
-            return position;
-
-        }
-
-        private void btnNameSearch_Click(object sender, EventArgs e)
+        private void btnNameSearch_Click_1(object sender, EventArgs e)
         {
             int counter = 0;
 
@@ -166,28 +172,28 @@ namespace NameSearch
                     namesArray[counter] = inputFile.ReadLine();
                     counter++;
                 }
-                
+
                 SelectionSort(namesArray);
 
                 position = BinarySearch(namesArray, value);
 
                 inputFile.Close();
-                
+
                 lbOutPut.Items.Clear();
 
-                foreach ( int valuee in namesArray[position])
+                foreach (int valuee in namesArray[position])
                 {
                     output = namesArray[position];
                     lbOutPut.Items.Add(output);
                 }
-                
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-
         }
+
 
         private void exportToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -209,7 +215,7 @@ namespace NameSearch
                 }
 
                 // Sort Array alphabetically 
-                Array.Sort(namesArray);
+                SelectionSort(namesArray);
 
                 // Assign the file name to a variable
                 outputFile = File.CreateText("OutputNames.csv");
@@ -256,7 +262,7 @@ namespace NameSearch
                 }
 
                 // Sort Array alphabetically 
-                Array.Sort(namesArray);
+                SelectionSort(namesArray);
 
                 // Close file connection
                 inputFile.Close();
@@ -282,13 +288,17 @@ namespace NameSearch
 
         private void btnClear_Click(object sender, EventArgs e)
         {
+            // Clear list box
             lbOutPut.Items.Clear();
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            // Close Program
             Application.Exit();
         }
+
+        
     }
         
     }
