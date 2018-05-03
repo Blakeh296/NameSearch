@@ -166,14 +166,14 @@ namespace NameSearch
             DateTime Start = DateTime.Now;
             DateTime Finish;
             TimeSpan Time;
-            int counter = 0;
+
 
             try
             {
                 // Declare Variables
                 string value = textBox1.Text;
                 int position;
-                string output;
+                int counter = 0;
 
                 // Constant for Array
                 const int SIZE = 5000;
@@ -192,6 +192,8 @@ namespace NameSearch
                 }
                 // Perform Selection sort
                 SelectionSort(namesArray);
+
+
 
                 // Use position variable to perform BinarySearch, with the Array and TextBox String
                 position = BinarySearch(namesArray, value);
