@@ -114,7 +114,7 @@ namespace NameSearch
                     position = middle;
                 }
                 //Else if value is in lower half
-                else if (string.Compare(namesArray[middle], value, false) == 1)
+                else if (string.Compare(namesArray[middle], value, false) > 0)
                 {
                     last = middle - 1;
                 }
@@ -205,10 +205,8 @@ namespace NameSearch
 
                 Time = Finish - Start;
 
-                // Clear the Listbox
-                lbOutPut.Items.Clear();
                 // Output position to list box
-                lbOutPut.Items.Add("Found : " + value.ToString());
+                lbOutPut.SetSelected(position, true);
                 // display the time this took in the Label
 
                 // Code changes message based on how long it took to load
@@ -220,8 +218,8 @@ namespace NameSearch
                 {
                     label1.Text = Time.Seconds.ToString() + " Second.";
                 }
-
-                MessageBox.Show("Found !");
+                // Display that the results were found
+                MessageBox.Show("Found " + "'" + value + "'" + " At Location " + position);
 
             }
             catch (Exception ex)
@@ -234,6 +232,7 @@ namespace NameSearch
 
         private void exportToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            // Variables
             int counter = 0;
             DateTime First = DateTime.Now;
             DateTime Last;
