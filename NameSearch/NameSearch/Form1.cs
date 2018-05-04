@@ -13,6 +13,13 @@ namespace NameSearch
 {
     public partial class Form1 : Form
     {
+        // Array variables
+        const int SIZE = 5000;
+        string[] namesArray = new string[SIZE];
+
+        // Take the names from the file
+        StreamReader inputFile = File.OpenText("Names.csv");
+
         public Form1()
         {
             InitializeComponent();
@@ -30,12 +37,15 @@ namespace NameSearch
                 DateTime Finish;
                 TimeSpan Time;
 
-                // Array variables
-                const int SIZE = 5000;
-                string[] namesArray = new string[SIZE];
-
-                // Take the names from the file
-                StreamReader inputFile = File.OpenText("Names.csv");
+                // Just to be sure the label populates correctly
+                if (radioButton1.Checked)
+                {
+                    label2.Text = "Type Anything";
+                }
+                else if (radioButton2.Checked)
+                {
+                    label2.Text = "Type Exact 'Last name, First name'";
+                }
                 
                 // Input names into Names Array while counter is less than the number of items
                 while (counter < namesArray.Length && !inputFile.EndOfStream)
@@ -161,79 +171,11 @@ namespace NameSearch
             }
         }
 
-        private void btnNameSearch_Click_1(object sender, EventArgs e)
-        {
-            DateTime Start = DateTime.Now;
-            DateTime Finish;
-            TimeSpan Time;
-
-
-            try
-            {
-                // Declare Variables
-                string value = textBox1.Text;
-                int position;
-                int counter = 0;
-
-                // Constant for Array
-                const int SIZE = 5000;
-
-                // Array declaration
-                string[] namesArray = new string[SIZE];
-
-                // Open file
-                StreamReader inputFile = File.OpenText("Names.csv");
-
-                // Input names into Names Array while counter is less than the number of items
-                while (counter < namesArray.Length && !inputFile.EndOfStream)
-                {
-                    namesArray[counter] = inputFile.ReadLine();
-                    counter++;
-                }
-                // Perform Selection sort
-                SelectionSort(namesArray);
-
-
-
-                // Use position variable to perform BinarySearch, with the Array and TextBox String
-                position = BinarySearch(namesArray, value);
-
-                // Close the file
-                inputFile.Close();
-
-                Finish = DateTime.Now;
-
-                Time = Finish - Start;
-
-                // Output position to list box
-                lbOutPut.SetSelected(position, true);
-                // display the time this took in the Label
-
-                // Code changes message based on how long it took to load
-                if (Time.Seconds > 1)
-                {
-                    label1.Text = Time.Seconds.ToString() + " Seconds.";
-                }
-                else
-                {
-                    label1.Text = Time.Seconds.ToString() + " Second.";
-                }
-                // Display that the results were found
-                MessageBox.Show("Found " + "'" + value + "'" + " At Location " + position);
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        
+            
 
         private void exportToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // Variables
-            int counter = 0;
             DateTime First = DateTime.Now;
             DateTime Last;
             TimeSpan Time;
@@ -241,29 +183,16 @@ namespace NameSearch
             try
             {
                 // Array variables
-                const int SIZE = 5000;
-                string[] namesArray = new string[SIZE];
-                StreamReader inputFile = File.OpenText("Names.csv");
-                StreamWriter outputFile;
 
-                // Input names into Names Array while counter is less than the number of items
-                while (counter < namesArray.Length && !inputFile.EndOfStream)
+                string txtPath = "CustomOutPutNames.csv";
+                StreamWriter outputFile = new StreamWriter(txtPath);
+
+                // write each item in listbox to output file
+                foreach (string name in lbOutPut.Items)
                 {
-                    namesArray[counter] = inputFile.ReadLine();
-                    counter++;
+                    outputFile.WriteLine(name.ToString());
                 }
 
-                // Sort Array alphabetically 
-                SelectionSort(namesArray);
-
-                // Assign the file name to a variable
-                outputFile = File.CreateText("OutputNames.csv");
-
-                // While index < Array length, output array elements to the file
-                for (int index = 0; index < namesArray.Length; index++)
-                {
-                    outputFile.WriteLine(namesArray[index]);
-                }
 
                 // Close the file
                 inputFile.Close();
@@ -275,11 +204,11 @@ namespace NameSearch
                 // Code changes message based on how the items took to export
                 if (Time.Seconds > 1)
                 {
-                    label1.Text = "Exported " + SIZE + " Items in " + Time.Seconds.ToString() + " Seconds.";
+                    label1.Text = "Exported " + lbOutPut.Items.Count + " Items in " + Time.Seconds.ToString() + " Seconds.";
                 }
                 else
                 {
-                    label1.Text = "Exported " + SIZE + " Items in " + Time.Seconds.ToString() + " Second.";
+                    label1.Text = "Exported " + lbOutPut.Items.Count + " Items in " + Time.Seconds.ToString() + " Second.";
                 }
 
                 MessageBox.Show("Done !");
@@ -361,7 +290,129 @@ namespace NameSearch
             Application.Exit();
         }
 
-        
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (radioButton1.Checked)
+                {
+                    // Time variables
+                    DateTime start = DateTime.Now;
+                    DateTime Finish;
+                    TimeSpan Time;
+
+                    label2.Text = "Type Anything";
+                    string search = textBox1.Text;
+                    // Clears list box and prepares it to show results
+                    lbOutPut.Items.Clear();
+                    // Searches for the item in the array that contains the text from text box
+                    lbOutPut.Items.AddRange(namesArray.Where(n => n.Contains(search)).ToArray());
+                    //Time variables
+                    Finish = DateTime.Now;
+                    Time = Finish - start; string text = lbOutPut.GetItemText(lbOutPut.SelectedItem);
+                    label1.Text = lbOutPut.Items.Count + " " + "found in" + " " + (Time.TotalSeconds.ToString()) + " " + "seconds";
+                }
+                else
+                {
+                    MessageBox.Show("Please check that 'Standard Search Option' is selected");
+                }
+                
+
+            }
+            catch
+            { 
+                MessageBox.Show("Unknown Error");
+            }
+        }
+
+
+
+        private void textBox2_KeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (radioButton2.Checked && e.KeyCode == Keys.Enter)
+                {
+                    //Time variables
+                        DateTime start = DateTime.Now;
+                    DateTime Finish;
+                    TimeSpan Time;
+
+                    
+                    // Get the search item
+                    string SearchObject = textBox2.Text;
+
+                    // Perform binary search with the search object
+                    int position = BinarySearch(namesArray, SearchObject);
+
+                    // create a bool to use later
+                    bool found = namesArray.Contains(SearchObject);
+
+                    lbOutPut.SetSelected(position, true);
+                    // if the binary search is unsuccessful
+                    if (found == false)
+                    {
+                        MessageBox.Show("This name could not be found");
+                    }
+                    else
+                    {
+                        // finish calculation
+                        Finish = DateTime.Now;
+                        Time = Finish - start;
+
+                        // Move selected item to the searched item
+                        lbOutPut.SetSelected(position, true);
+
+                        // declare a string to use later
+                        string text = lbOutPut.GetItemText(lbOutPut.SelectedItem);
+
+                        // Communicate to the user
+                        label1.Text = text + " Found at location " + position + " in " + (Time.TotalSeconds.ToString()) + " Seconds";
+
+                        // Communicate to the user
+                        textBox2.Text = "Type and press enter";
+                    }
+                }
+
+
+            }
+            catch
+            {
+                MessageBox.Show("String must be exact");
+            }
+        }
+
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            label2.Text = "Type Exact 'Last name, First name'";
+        }
+
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            label2.Text = "Type Anything";
+        }
+
+        private void immersiveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+  
+            radioButton2.Visible = false;
+            textBox2.Visible = false;
+            btnClear.Visible = false;
+            lbOutPut.Location = new Point(17, 118);
+            lbOutPut.Size = new Size(297, 202);
+
+        }
+
+        private void standardToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            radioButton2.Visible = true;
+            textBox2.Visible = true;
+            btnClear.Visible = true;
+            btnClear.Location = new Point(225, 218);
+            lbOutPut.Location = new Point(14, 155);
+            lbOutPut.Size = new Size(191, 148);
+
+        }
     }
         
     }
